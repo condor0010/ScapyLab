@@ -1,11 +1,28 @@
 #!/bin/python
 from scapy.all import *
 
-# interface names are difrent on my laptop
+# set interface to wlp4s0
 conf.iface="wlp4s0"
 
-dst = "192.168.1.100"
-msg = "adastra per explotium"
+# stop scapy from printing junk
+conf.verb = 0
 
-pkt = IP(dst=dst)/ICMP()/Raw(load=msg)
-send(pkt)
+# set source and destination adresses
+mac_src = "00:00:00:00:00:00"
+mac_dst = "ff:ff:ff:ff:ff:ff"
+
+# make ethernet headder
+ether = Ether(src=mac_src, dst=mac_dst)
+
+# make arp request
+arp = ARP(pdst="0.0.0.0")
+
+# make packet
+packet = ether/arp
+
+# for testing will remove
+wireshark (packet)
+
+#sends packet
+sendp(packet)
+

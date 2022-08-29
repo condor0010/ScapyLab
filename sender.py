@@ -14,15 +14,14 @@ mac_dst = "ff:ff:ff:ff:ff:ff"
 # make ethernet headder
 ether = Ether(src=mac_src, dst=mac_dst)
 
-# make arp request
-arp = ARP(pdst="0.0.0.0")
+def mk_pkt(lttr):
+    ip_addr = "0.0.0."+str(ord(lttr))
+    arp = ARP(pdst=ip_addr) # make arp request
+    packet = ether/arp # make packet
+    sendp(packet) # send packet
 
-# make packet
-packet = ether/arp
 
-# for testing will remove
-wireshark (packet)
+msg = "horney goat weed"
 
-#sends packet
-sendp(packet)
-
+for lttr in msg:
+    mk_pkt(lttr)

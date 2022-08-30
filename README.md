@@ -1,2 +1,6 @@
 # lab1
-## for a protocal what do you guys think we should use I kinda want to try gopher but it wont work for the extra credit witch i assume were going for.
+## use arp for extra creddit
+## TODO:
+### xor thing falco did, or something more complex
+### replace msg varible with data stream from stdin Ex: cat boobs.txt | ./sender.py
+### do recv file, works in wireshark so it should be fine

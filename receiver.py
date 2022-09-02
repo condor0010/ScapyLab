@@ -1,10 +1,10 @@
 #!/bin/python
 from scapy.all import *
 
-def pkt_callback(pkt):
-    if pkt[ICMP].type==8:
-        print("[+] Received Message: "+str(pkt[Raw].load))
+def gb(pkt):
+    print(chr(int(pkt[ARP].pdst.split(".")[3])))
 
-print("[+] Started Listener")
 
-sniff(iface="wlan0",prn=pkt_callback,filter='icmp',store=0)
+while True:
+    pkt = sniff(filter="arp", count=1, prn=gb)
+

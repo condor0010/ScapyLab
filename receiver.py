@@ -1,10 +1,15 @@
 #!/bin/python
 from scapy.all import *
+import sys
 
 def gb(pkt):
-    print(chr(int(pkt[ARP].pdst.split(".")[3])))
+    ret = (chr(int(pkt[ARP].pdst.split(".")[3])))
+    if (ret == chr(1)):
+        sys.exit(0)
+    else:
+        print(ret)
 
 
 while True:
-    pkt = sniff(filter="arp", count=1, prn=gb)
+    sniff(filter="arp", count=1, prn=gb)
 

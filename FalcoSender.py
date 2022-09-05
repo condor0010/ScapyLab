@@ -45,7 +45,7 @@ def gen_secret(c, key):
 
 
 def gen_arp(macs):
-    return Ether(dst=macs[0], src=macs[1]) / ARP(hwdst=macs[2], hwsrc=macs[3])
+    return Ether(src=macs[0]) / ARP(hwdst=macs[1], hwsrc=macs[2])
 
 
 def f_byte(n):
@@ -53,7 +53,7 @@ def f_byte(n):
 
 
 def gen_signal(mac1, mac2, op):
-    return Ether(dst=mac1, src=mac2) / ARP(hwdst=mac2, hwsrc=mac1, op=op)
+    return Ether(src=mac2) / ARP(hwdst=mac2, hwsrc=mac1, op=op)
 
 
 def gen_mac(secrets, keys):
@@ -83,12 +83,12 @@ def main():
     for i in range(0, len(keys), 3):
         macs.append(gen_mac(secrets[i:i+3], keys[i:i+3]))
 
-    if len(macs) % 4 != 0:
-        for i in range(4 - len(macs) % 4):
+    if len(macs) % 3 != 0:
+        for i in range(3 - len(macs) % 3):
             macs.append(gen_mac([], []))
 
-    for i in range(0, len(macs), 4):
-        pkt.append(gen_arp(macs[i:i+4]))
+    for i in range(0, len(macs), 3):
+        pkt.append(gen_arp(macs[i:i+3]))
 
     sendp(start, iface="lo")
 

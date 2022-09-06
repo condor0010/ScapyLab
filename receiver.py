@@ -7,7 +7,7 @@ def gb(pkt):
     if (ret == chr(1)):
         sys.exit(0)
     else:
-        print(ret)
+        print(xor(ret, 42))
 
 
 while True:

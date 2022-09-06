@@ -1,6 +1,7 @@
 #!/bin/python
 from scapy.all import *
 from time import sleep
+from operator import xor
 import random
 conf.iface="virbr0" # set interface to wlp4s0
 conf.verb = 0 # stop scapy from printing junk
@@ -21,7 +22,7 @@ def mk_pkt(lttr):
 msg = "horney goat weed"
 
 for lttr in msg:
-    mk_pkt(lttr)
+    mk_pkt(xor(lttr, 42))
     slp = (2+random.random())
     print(slp)
     sleep (slp)

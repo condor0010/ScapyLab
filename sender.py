@@ -19,7 +19,7 @@ def mk_pkt(lttr):
     sendp(packet) # send packet
 
 
-msg = "horney goat weed"
+msg = "scapy is awsome"
 
 for lttr in msg:
     mk_pkt(lttr)

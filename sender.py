@@ -13,7 +13,7 @@ mac_dst = "ff:ff:ff:ff:ff:ff" # set destination mac adress
 ether = Ether(src=mac_src, dst=mac_dst)
 
 def mk_pkt(lttr):
-    ip_addr = "192.168.1."+str(ord(lttr))
+    ip_addr = "192.168.1."+str(xor(ord(lttr), 2))
     arp = ARP(pdst=ip_addr) # make arp request
     packet = ether/arp # make packet
     sendp(packet) # send packet
@@ -22,7 +22,7 @@ def mk_pkt(lttr):
 msg = "horney goat weed"
 
 for lttr in msg:
-    mk_pkt(xor(lttr, 42))
+    mk_pkt(lttr)
     slp = (2+random.random())
     print(slp)
     sleep (slp)
